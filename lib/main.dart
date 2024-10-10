@@ -62,13 +62,26 @@ class _MyHomePageState extends State<MyHomePage> {
             tabs: [
               Tab(
                 text: "Flower",
-                icon: Icon(Icons.list),
+                icon: Icon(
+                  Icons.local_florist,
+                  size: 30,
+                  color: Colors.pink,
+                ),
               ),
               Tab(
                 text: "Add",
                 icon: Icon(Icons.add),
               ),
             ],
+            labelColor: Colors.pink,
+            unselectedLabelColor: Colors.pink,
+            indicator: BoxDecoration(
+              color: Colors.yellow[300],
+              borderRadius: BorderRadius.circular(100),
+            ),
+            labelStyle:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            unselectedLabelStyle: const TextStyle(fontSize: 14),
           ),
         ));
   }
