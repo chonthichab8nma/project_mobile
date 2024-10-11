@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 21, 160, 199)),
           useMaterial3: true,
         ),
         home: const MyHomePage(),
@@ -69,15 +70,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Tab(
-                text: "Add",
-                icon: Icon(Icons.add),
-              ),
+                  text: "Add",
+                  icon: Icon(
+                    Icons.add,
+                    size: 30,
+                    color: Colors.green,
+                  )),
             ],
             labelColor: Colors.pink,
             unselectedLabelColor: Colors.pink,
             indicator: BoxDecoration(
-              color: Colors.yellow[300],
-              borderRadius: BorderRadius.circular(100),
+              color: Colors.yellow[200],
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.pink.withOpacity(0.5),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                ),
+              ],
             ),
             labelStyle:
                 const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
