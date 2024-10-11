@@ -1,5 +1,6 @@
 import 'package:account/screens/form_screen.dart';
 import 'package:account/screens/home_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:account/provider/transaction_provider.dart';
@@ -11,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -43,7 +43,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<TransactionProvider>(context, listen: false).initData();
   }
@@ -51,49 +50,72 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          body: TabBarView(
-            children: [
-              HomeScreen(),
-              FormScreen(),
-            ],
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('My Account App'),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 21, 160, 199),
+        ),
+        body: TabBarView(
+          children: [
+            HomeScreen(),
+            FormScreen(),
+            Center(child: Text('New Tab')),
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => FormScreen()));
+            },
+            backgroundColor: Color.fromARGB(255, 247, 159, 188),
+            child: const Icon(
+              Icons.add,
+              size: 30,
+            ),
           ),
-          bottomNavigationBar: TabBar(
+        ),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: TabBar(
             tabs: [
               Tab(
-                text: "Flower",
                 icon: Icon(
                   Icons.local_florist,
                   size: 30,
-                  color: Colors.pink,
+                  color: const Color.fromARGB(255, 247, 159, 188),
                 ),
               ),
               Tab(
-                  text: "Add",
-                  icon: Icon(
-                    Icons.add,
-                    size: 30,
-                    color: Colors.green,
-                  )),
+                icon: Icon(
+                  Icons.add,
+                  size: 30,
+                  color: Color.fromARGB(255, 247, 159, 188),
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.bar_chart,
+                  size: 30,
+                  color: Color.fromARGB(255, 247, 159, 188),
+                ),
+              ),
             ],
             labelColor: Colors.pink,
             unselectedLabelColor: Colors.pink,
-            indicator: BoxDecoration(
-              color: Colors.yellow[200],
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.pink.withOpacity(0.5),
-                  blurRadius: 10,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
+            indicator: BoxDecoration(),
             labelStyle:
                 const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             unselectedLabelStyle: const TextStyle(fontSize: 14),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

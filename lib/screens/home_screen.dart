@@ -19,11 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: const Text(
-            "MoodTacker",
-          ),
-          centerTitle: true,
+          //backgroundColor: Theme.of(context).colorScheme.primary,
+          //title: const Text(
+          //"MoodTacker",
+          //),
+          //centerTitle: true,
           actions: [
             IconButton(
               icon: const Icon(Icons.exit_to_app),
