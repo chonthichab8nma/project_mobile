@@ -37,6 +37,31 @@ class _FormScreenState extends State<FormScreen> {
     }
   }
 
+  Widget buildEmotionIcon(String color, Color iconColor) {
+    return GestureDetector(
+        onTap: () {
+          setState(() {
+            selectedEmotionColor = color;
+          });
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: selectedEmotionColor == color
+                  ? Colors.black
+                  : Colors.transparent,
+              width: 2,
+            ),
+          ),
+          child: Icon(
+            Icons.local_florist,
+            color: iconColor,
+            size: 40,
+          ),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,15 +105,39 @@ class _FormScreenState extends State<FormScreen> {
                         onTap: () => _selectDate(context)),
                   ),
                   const SizedBox(height: 20),
+                  const Text(
+                    'เลือกอารมณ์ของคุณ',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      buildEmotionIcon('Red', Colors.red),
+                      buildEmotionIcon('Blue', Colors.blue),
+                      buildEmotionIcon('Green', Colors.green),
+                      buildEmotionIcon('Yellow', Colors.yellow),
+                      buildEmotionIcon('Pink', Colors.pink),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
                   Card(
                     elevation: 2.0,
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: TextFormField(
                         decoration: const InputDecoration(labelText: 'Note'),
+                        controller: noteController,
                       ),
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {}
+                    },
+                    child: const Text('บันทึก'),
+                  ),
                 ],
               ),
 

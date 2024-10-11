@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: const Color.fromARGB(255, 223, 205, 250),
           ),
           child: TabBar(
             tabs: [
