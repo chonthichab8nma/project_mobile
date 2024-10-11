@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 21, 160, 199)),
-          useMaterial3: true,
-        ),
+        //theme: ThemeData(
+        //colorScheme: ColorScheme.fromSeed(
+        //  seedColor: const Color.fromARGB(255, 112, 216, 64)),
+        //useMaterial3: true,
+        //),
         home: const MyHomePage(),
       ),
     );
@@ -50,12 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('My Account App'),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 21, 160, 199),
+          backgroundColor: Color.fromARGB(255, 131, 21, 199),
         ),
         body: TabBarView(
           children: [
@@ -63,21 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
             FormScreen(),
             Center(child: Text('New Tab')),
           ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => FormScreen()));
-            },
-            backgroundColor: Color.fromARGB(255, 247, 159, 188),
-            child: const Icon(
-              Icons.add,
-              size: 30,
-            ),
-          ),
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
@@ -96,14 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(
                   Icons.add,
                   size: 30,
-                  color: Color.fromARGB(255, 247, 159, 188),
-                ),
-              ),
-              Tab(
-                icon: Icon(
-                  Icons.bar_chart,
-                  size: 30,
-                  color: Color.fromARGB(255, 247, 159, 188),
+                  color: const Color.fromARGB(255, 247, 159, 188),
                 ),
               ),
             ],
