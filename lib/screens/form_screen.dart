@@ -26,11 +26,13 @@ class _FormScreenState extends State<FormScreen> {
   final List<String> emotionColors = ['Red', 'Blue', 'Green', 'Yellow', 'Pink'];
 
   Future<void> _selectDate(BuildContext context) async {
+    print('Date');
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: currentDate,
-        firstDate: DateTime(2024),
-        lastDate: DateTime(2024));
+      context: context,
+      initialDate: currentDate,
+      firstDate: DateTime(2024),
+      lastDate: DateTime.now(),
+    );
     if (picked != null && picked != currentDate) {
       setState(() {
         currentDate = picked;
@@ -103,13 +105,25 @@ class _FormScreenState extends State<FormScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: TextFormField(
-                          controller: dateController, // Controller สำหรับวันที่
-                          decoration: const InputDecoration(
-                            labelText: 'กรอกวันที่ (year-month-day)',
-                            suffixIcon: Icon(Icons.calendar_today),
-                          ),
-                          readOnly: true,
-                          onTap: () => _selectDate(context)),
+                        controller: dateController,
+                        decoration: const InputDecoration(
+                          labelText: 'กรอกวันที่ (year-month-day)',
+                          suffixIcon: Icon(Icons.calendar_today),
+                        ),
+                        //readOnly: true,
+                        //onTap: () => _selectDate(context)),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'กรุณากรอกวันที่';
+                          }
+                          try {
+                            DateFormat('yyyy-MM-dd').parseStrict(value);
+                          } catch (e) {
+                            return 'กรุณากรอกวันที่ในรูปแบบ YYYY-MM-DD';
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),

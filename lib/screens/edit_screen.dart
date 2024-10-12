@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditScreen extends StatefulWidget {
-
   Transactions statement;
 
   EditScreen({super.key, required this.statement});
@@ -20,12 +19,14 @@ class _EditScreenState extends State<EditScreen> {
 
   final titleController = TextEditingController();
 
-  final amountController = TextEditingController();
+  final noteController = TextEditingController();
+  String? selectedEmotionColor;
 
   @override
   Widget build(BuildContext context) {
-    titleController.text = widget.statement.title;
-    amountController.text = widget.statement.amount.toString();
+    titleController.text = widget.statement.note;
+    noteController.text = widget.statement.note.toString();
+    selectedEmotionColor = widget.statement.emotionColor;
     return Scaffold(
         appBar: AppBar(
           title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
@@ -48,47 +49,47 @@ class _EditScreenState extends State<EditScreen> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'จำนวนเงิน',
+                    labelText: 'Note',
                   ),
-                  keyboardType: TextInputType.number,
-                  controller: amountController,
-                  validator: (String? input) {
-                    try {
-                      double amount = double.parse(input!);
-                      if (amount < 0) {
-                        return 'กรุณากรอกข้อมูลมากกว่า 0';
-                      }
-                    } catch (e) {
-                      return 'กรุณากรอกข้อมูลเป็นตัวเลข';
-                    }
-                  },
+                  //keyboardType: TextInputType.number,
+                  controller: noteController,
+                  //validator: (String? input) {
+                  //try {
+                  //double amount = double.parse(input!);
+                  //if (amount < 0) {
+                  //return 'กรุณากรอกข้อมูลมากกว่า 0';
+                  //}
+                  //} catch (e) {
+                  //return 'กรุณากรอกข้อมูลเป็นตัวเลข';
+                  //}
+                  //},
                 ),
                 TextButton(
                     child: const Text('แก้ไขข้อมูล'),
                     onPressed: () {
-                          if (formKey.currentState!.validate())
-                            {
-                              // create transaction data object
-                              var statement = Transactions(
-                                  keyID: widget.statement.keyID,
-                                  title: titleController.text,
-                                  amount: double.parse(amountController.text),
-                                  date: DateTime.now()
-                                  );
-                            
-                              // add transaction data object to provider
-                              var provider = Provider.of<TransactionProvider>(context, listen: false);
-                              
-                              provider.updateTransaction(statement);
+                      if (formKey.currentState!.validate()) {
+                        // create transaction data object
+                        var statement = Transactions(
+                            id: widget.statement.id,
+                            note: titleController.text,
+                            emotionColor: selectedEmotionColor ?? 'Unknown',
+                            date: DateTime.now());
 
-                              Navigator.push(context, MaterialPageRoute(
+                        // add transaction data object to provider
+                        var provider = Provider.of<TransactionProvider>(context,
+                            listen: false);
+
+                        provider.updateTransaction(statement);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
                                 fullscreenDialog: true,
-                                builder: (context){
+                                builder: (context) {
                                   return MyHomePage();
-                                }
-                              ));
-                            }
-                        })
+                                }));
+                      }
+                    })
               ],
             )));
   }
