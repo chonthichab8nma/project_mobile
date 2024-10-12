@@ -1,13 +1,13 @@
 class Transactions {
-  int? keyID;
-  final String title;
-  final double amount;
+  final String id;
+  final String note;
+  final String emotionColor;
   final DateTime date;
 
   Transactions({
-    this.keyID,
-    required this.title,
-    required this.amount,
+    required this.id,
+    required this.note,
+    required this.emotionColor,
     required this.date,
   });
 }

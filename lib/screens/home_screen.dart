@@ -49,19 +49,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     child: ListTile(
-                      title: Text(statement.title),
+                      title: Text(statement.note),
                       subtitle: Text(DateFormat('dd MMM yyyy hh:mm:ss')
                           .format(statement.date)),
                       leading: CircleAvatar(
                         radius: 30,
                         child: FittedBox(
-                          child: Text('${statement.amount}'),
+                          child: Text('${statement.emotionColor}'),
                         ),
                       ),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete),
                         onPressed: () {
-                          provider.deleteTransaction(statement.keyID);
+                          provider.deleteTransaction(statement.id);
                         },
                       ),
                       onTap: () {

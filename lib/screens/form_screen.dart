@@ -96,7 +96,7 @@ class _FormScreenState extends State<FormScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Card(
                     elevation: 2.0,
@@ -105,9 +105,8 @@ class _FormScreenState extends State<FormScreen> {
                       child: TextFormField(
                           controller: dateController, // Controller สำหรับวันที่
                           decoration: const InputDecoration(
-                            labelText: 'กรอกวันที่ (yyyy-mm-dd)',
-                            suffixIcon:
-                                Icon(Icons.calendar_today), // ไอคอนเลือกวันที่
+                            labelText: 'กรอกวันที่ (year-month-day)',
+                            suffixIcon: Icon(Icons.calendar_today),
                           ),
                           readOnly: true,
                           onTap: () => _selectDate(context)),
@@ -144,7 +143,27 @@ class _FormScreenState extends State<FormScreen> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {}
+                      if (formKey.currentState!.validate()) {
+                        var statement = Transactions(
+                          id: idController.text,
+                          note: noteController.text,
+                          emotionColor: selectedEmotionColor ?? 'Unknown',
+                          date: currentDate,
+                        );
+                        var provider = Provider.of<TransactionProvider>(context,
+                            listen: false);
+                        provider.addTransaction(statement);
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (context) {
+                              return MyHomePage();
+                            },
+                          ),
+                        );
+                      }
                     },
                     child: const Text('บันทึก'),
                   ),
@@ -193,21 +212,21 @@ class _FormScreenState extends State<FormScreen> {
               //date: DateTime.now());
 
               // add transaction data object to provider
-              //                       var provider = Provider.of<TransactionProvider>(context,
-              //                         listen: false);
+//                                     var provider = Provider.of<TransactionProvider>(context,
+              //                                      listen: false);
 //
-              //                      provider.addTransaction(statement);
+              //                                   provider.addTransaction(statement);
 //
-              //                      Navigator.push(
-              //                        context,
-              //                      MaterialPageRoute(
-              //                        fullscreenDialog: true,
-              //                      builder: (context) {
-              //                      return MyHomePage();
-              //                  }));
-              //      }
-              //  })
-              // ],
+              //                                  Navigator.push(
+              //                                    context,
+              //                                 MaterialPageRoute(
+              //                                  fullscreenDialog: true,
+              //                               builder: (context) {
+              //                              return MyHomePage();
+              //                        }));
+              //           }
+              //      })
+              //    ],
             )));
   }
 }
