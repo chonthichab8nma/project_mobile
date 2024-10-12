@@ -11,32 +11,44 @@ class TransactionProvider with ChangeNotifier {
 
   void initData() async {
     var db = await TransactionDB(dbName: 'transactions.db');
-    this.transactions = await db.loadAllData();
-    print(this.transactions);
+    transactions = await db.loadAllData();
+    print(transactions);
     notifyListeners();
   }
 
   void addTransaction(Transactions transaction) async {
-    var db = await TransactionDB(dbName: 'transactions.db');
-    await db.insertDatabase(transaction);
-    this.transactions = await db.loadAllData();
-    print(this.transactions);
-    notifyListeners();
+    try {
+      var db = await TransactionDB(dbName: 'transactions.db');
+      await db.insertDatabase(transaction);
+      transactions = await db.loadAllData();
+      print(transactions);
+      notifyListeners();
+    } catch (e) {
+      print('Error adding transaction: $e');
+    }
   }
 
-  void deleteTransaction(String id) async {
-    print('delete index: $id');
-    var db = await TransactionDB(dbName: 'transactions.db');
-    await db.deleteDatabase(id);
-    this.transactions = await db.loadAllData();
-    notifyListeners();
+  Future<void> deleteTransaction(String id) async {
+    try {
+      print('delete index: $id');
+      var db = await TransactionDB(dbName: 'transactions.db');
+      await db.deleteDatabase(id);
+      transactions = await db.loadAllData();
+      notifyListeners();
+    } catch (e) {
+      print('Error deleting transaction: $e');
+    }
   }
 
-  void updateTransaction(Transactions transaction) async {
-    // print('update index: ${transaction.keyID}');
-    var db = await TransactionDB(dbName: 'transactions.db');
-    await db.updateDatabase(transaction);
-    this.transactions = await db.loadAllData();
-    notifyListeners();
+  Future<void> updateTransaction(Transactions transaction) async {
+    try {
+      print('update index: ${transaction.id}');
+      var db = await TransactionDB(dbName: 'transactions.db');
+      await db.updateDatabase(transaction);
+      transactions = await db.loadAllData();
+      notifyListeners();
+    } catch (e) {
+      print('Error updating transaction: $e');
+    }
   }
 }

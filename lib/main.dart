@@ -53,9 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Account App'),
+          title: const Text('MoodLocker'),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 219, 203, 229),
+          backgroundColor: Color(0xFF759FB1),
         ),
         body: TabBarView(
           children: [

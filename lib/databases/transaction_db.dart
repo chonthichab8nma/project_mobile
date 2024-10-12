@@ -55,19 +55,18 @@ class TransactionDB {
     } finally {
       await db.close();
     }
-    return transactions;
   }
 
-  deleteDatabase(String id) async {
+  Future<void> deleteDatabase(String id) async {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store('expense');
     await store.delete(db,
-        finder: Finder(filter: Filter.equals(Field.key, id)));
+        finder: Finder(filter: Filter.equals(Field.key, int.parse(id))));
     // Delete from table... where rowId = index
-    db.close();
+    await db.close();
   }
 
-  updateDatabase(Transactions statement) async {
+  Future<void> updateDatabase(Transactions statement) async {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store('expense');
     var filter = Finder(filter: Filter.equals(Field.key, statement.id));
