@@ -24,7 +24,7 @@ class _EditScreenState extends State<EditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    titleController.text = widget.statement.note;
+    titleController.text = widget.statement.id;
     noteController.text = widget.statement.note.toString();
     selectedEmotionColor = widget.statement.emotionColor;
     return Scaffold(

@@ -29,7 +29,8 @@ class _FormScreenState extends State<FormScreen> {
     print('Date');
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: currentDate,
+      //initialDate: currentDate,
+      initialDate: DateTime.now(),
       firstDate: DateTime(2024),
       lastDate: DateTime.now(),
     );
@@ -110,8 +111,25 @@ class _FormScreenState extends State<FormScreen> {
                           labelText: 'กรอกวันที่ (year-month-day)',
                           suffixIcon: Icon(Icons.calendar_today),
                         ),
-                        //readOnly: true,
+                        readOnly: true,
                         //onTap: () => _selectDate(context)),
+                        onTap: () async {
+                          FocusScope.of(context).requestFocus(
+                              FocusNode()); // เพื่อป้องกันคีย์บอร์ดจากการเปิดขึ้น
+                          DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2024),
+                            lastDate: DateTime(2030),
+                          );
+                          if (pickedDate != null) {
+                            setState(() {
+                              currentDate = pickedDate;
+                              dateController.text = DateFormat('yyyy-MM-dd')
+                                  .format(pickedDate); // แสดงวันที่ในฟิลด์
+                            });
+                          }
+                        },
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'กรุณากรอกวันที่';

@@ -3,6 +3,7 @@ class Transactions {
   final String note;
   final String emotionColor;
   final DateTime date;
+  //final String date;
 
   Transactions({
     required this.id,
