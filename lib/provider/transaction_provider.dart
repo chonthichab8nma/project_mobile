@@ -51,4 +51,20 @@ class TransactionProvider with ChangeNotifier {
       print('Error updating transaction: $e');
     }
   }
+
+  Future<void> editTransaction(
+      String id, String newNote, String newEmotionColor) async {
+    try {
+      var transaction = this.transactions.firstWhere((t) => t.id == id);
+      var updatedTransaction = Transactions(
+        id: transaction.id,
+        note: newNote,
+        emotionColor: newEmotionColor,
+        date: transaction.date,
+      );
+      await this.updateTransaction(updatedTransaction);
+    } catch (e) {
+      print('Error editing transaction: $e');
+    }
+  }
 }

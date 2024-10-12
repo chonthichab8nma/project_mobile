@@ -47,6 +47,21 @@ class _MyHomePageState extends State<MyHomePage> {
     Provider.of<TransactionProvider>(context, listen: false).initData();
   }
 
+  Widget gradientIcon(IconData icon, double size, List<Color> colors) {
+    return ShaderMask(
+      shaderCallback: (bounds) {
+        return LinearGradient(
+          colors: colors,
+        ).createShader(bounds);
+      },
+      child: Icon(
+        icon,
+        size: size,
+        color: Colors.white,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -56,13 +71,17 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text(
             'MoodLocker',
             style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
           centerTitle: false,
           backgroundColor: Color(0xFF759FB1),
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.account_circle),
+            icon: const Icon(
+              Icons.account_circle,
+              color: Colors.white,
+              size: 30,
+            ),
             onPressed: () {},
           ),
         ),
@@ -75,16 +94,24 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 223, 205, 250),
+            color: const Color.fromARGB(255, 0, 0, 0),
           ),
           child: TabBar(
             tabs: [
               Tab(
-                icon: Icon(
-                  Icons.local_florist,
-                  size: 30,
-                  color: const Color.fromARGB(255, 247, 159, 188),
+                child: gradientIcon(
+                  Icons.mood_sharp,
+                  40,
+                  [
+                    Color.fromARGB(255, 255, 189, 255),
+                    Color.fromARGB(255, 250, 255, 182),
+                  ],
                 ),
+                //icon: Icon(
+                //Icons.local_florist,
+                //size: 50,
+                //color: const Color.fromARGB(255, 247, 159, 188),
+                //),
               ),
               Tab(
                 icon: Icon(
