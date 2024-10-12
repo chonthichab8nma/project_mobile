@@ -53,9 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('MoodLocker'),
-          centerTitle: true,
+          title: const Text(
+            'MoodLocker',
+            style: TextStyle(
+                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: false,
           backgroundColor: Color(0xFF759FB1),
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.account_circle),
+            onPressed: () {},
+          ),
         ),
         body: TabBarView(
           children: [
