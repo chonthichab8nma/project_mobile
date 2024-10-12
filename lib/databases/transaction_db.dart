@@ -22,38 +22,47 @@ class TransactionDB {
   Future<int> insertDatabase(Transactions statement) async {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store('expense');
-
-    var keyID = store.add(db, {
-      "note": statement.note,
-      "emotionColor": statement.emotionColor,
-      "date": statement.date.toIso8601String()
-    });
-    db.close();
-    return keyID;
+    try {
+      var keyID = store.add(db, {
+        "note": statement.note,
+        "emotionColor": statement.emotionColor,
+        "date": statement.date.toIso8601String()
+      });
+      db.close();
+      return keyID;
+    } finally {
+      await db.close();
+    }
   }
 
   Future<List<Transactions>> loadAllData() async {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store('expense');
-    var snapshot = await store.find(db,
-        finder: Finder(sortOrders: [SortOrder(Field.key, false)]));
     List<Transactions> transactions = [];
-    for (var record in snapshot) {
-      transactions.add(Transactions(
-          id: record.key.toString(),
-          note: record['note'].toString(),
-          emotionColor: record['emotionColor'].toString(),
-          date: DateTime.parse(record['date'].toString())));
+    try {
+      var snapshot = await store.find(db,
+          finder: Finder(sortOrders: [SortOrder(Field.key, false)]));
+
+      for (var record in snapshot) {
+        transactions.add(Transactions(
+            id: record.key.toString(),
+            note: record['note'].toString(),
+            emotionColor: record['emotionColor'].toString(),
+            date: DateTime.parse(record['date'].toString())));
+      }
+      db.close();
+      return transactions;
+    } finally {
+      await db.close();
     }
-    db.close();
     return transactions;
   }
 
-  deleteDatabase(int? index) async {
+  deleteDatabase(String id) async {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store('expense');
     await store.delete(db,
-        finder: Finder(filter: Filter.equals(Field.key, index)));
+        finder: Finder(filter: Filter.equals(Field.key, id)));
     // Delete from table... where rowId = index
     db.close();
   }
@@ -63,8 +72,8 @@ class TransactionDB {
     var store = intMapStoreFactory.store('expense');
     var filter = Finder(filter: Filter.equals(Field.key, statement.id));
     var result = store.update(db, finder: filter, {
-      "title": statement.note,
-      "amount": statement.emotionColor,
+      "note": statement.note,
+      "emotionColor": statement.emotionColor,
       "date": statement.date.toIso8601String()
     });
     db.close();

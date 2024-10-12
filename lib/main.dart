@@ -55,13 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text('My Account App'),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 131, 21, 199),
+          backgroundColor: Color.fromARGB(255, 219, 203, 229),
         ),
         body: TabBarView(
           children: [
             HomeScreen(),
             FormScreen(),
-            Center(child: Text('New Tab')),
+            //Center(child: Text('New Tab')),
           ],
         ),
         bottomNavigationBar: Container(
