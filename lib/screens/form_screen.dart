@@ -18,6 +18,7 @@ class _FormScreenState extends State<FormScreen> {
 
   final idController = TextEditingController();
   final noteController = TextEditingController();
+  final dateController = TextEditingController();
 
   String? selectedEmotionColor;
   DateTime currentDate = DateTime.now();
@@ -33,6 +34,7 @@ class _FormScreenState extends State<FormScreen> {
     if (picked != null && picked != currentDate) {
       setState(() {
         currentDate = picked;
+        dateController.text = DateFormat('yyyy-MM-dd').format(currentDate);
       });
     }
   }
@@ -66,9 +68,9 @@ class _FormScreenState extends State<FormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('บันทึกอารมณ์'),
-        ),
-        body: Padding(
+            //title: const Text('บันทึกอารมณ์'),
+            ),
+        body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Form(
               key: formKey,
@@ -98,13 +100,20 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                   Card(
                     elevation: 2.0,
-                    child: ListTile(
-                        title: Text(
-                            'วันที่ : ${DateFormat('yyyy-MM-dd').format(currentDate)}'),
-                        trailing: const Icon(Icons.calendar_today),
-                        onTap: () => _selectDate(context)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: TextFormField(
+                          controller: dateController, // Controller สำหรับวันที่
+                          decoration: const InputDecoration(
+                            labelText: 'กรอกวันที่ (yyyy-mm-dd)',
+                            suffixIcon:
+                                Icon(Icons.calendar_today), // ไอคอนเลือกวันที่
+                          ),
+                          readOnly: true,
+                          onTap: () => _selectDate(context)),
+                    ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   const Text(
                     'เลือกอารมณ์ของคุณ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -113,25 +122,26 @@ class _FormScreenState extends State<FormScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      buildEmotionIcon('Red', Colors.red),
+                      buildEmotionIcon(
+                          'Red', const Color.fromARGB(255, 241, 100, 251)),
                       buildEmotionIcon('Blue', Colors.blue),
                       buildEmotionIcon('Green', Colors.green),
                       buildEmotionIcon('Yellow', Colors.yellow),
                       buildEmotionIcon('Pink', Colors.pink),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   Card(
                     elevation: 2.0,
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         decoration: const InputDecoration(labelText: 'Note'),
                         controller: noteController,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {}
