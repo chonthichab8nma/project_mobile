@@ -39,7 +39,7 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
+        title: const Text('Edit'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -136,7 +136,6 @@ class _EditScreenState extends State<EditScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    // สร้างอ็อบเจกต์ข้อมูลธุรกรรม
                     var statement = Transactions(
                       id: titleController.text,
                       note: noteController.text,
@@ -144,7 +143,6 @@ class _EditScreenState extends State<EditScreen> {
                       date: DateTime.now(),
                     );
 
-                    // เพิ่มอ็อบเจกต์ข้อมูลธุรกรรมไปยัง provider
                     var provider = Provider.of<TransactionProvider>(context,
                         listen: false);
                     provider.updateTransaction(statement);
@@ -166,8 +164,7 @@ class _EditScreenState extends State<EditScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: const Color.fromARGB(
-                      255, 192, 240, 250), // เปลี่ยนสีปุ่มที่นี่
+                  backgroundColor: const Color.fromARGB(255, 241, 192, 250),
                 ),
               ),
             ],

@@ -120,10 +120,8 @@ class _FormScreenState extends State<FormScreen> {
                           suffixIcon: Icon(Icons.calendar_today),
                         ),
                         readOnly: true,
-                        //onTap: () => _selectDate(context)),
                         onTap: () async {
-                          FocusScope.of(context).requestFocus(
-                              FocusNode()); // เพื่อป้องกันคีย์บอร์ดจากการเปิดขึ้น
+                          FocusScope.of(context).requestFocus(FocusNode());
                           DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
@@ -133,8 +131,8 @@ class _FormScreenState extends State<FormScreen> {
                           if (pickedDate != null) {
                             setState(() {
                               currentDate = pickedDate;
-                              dateController.text = DateFormat('yyyy-MM-dd')
-                                  .format(pickedDate); // แสดงวันที่ในฟิลด์
+                              dateController.text =
+                                  DateFormat('yyyy-MM-dd').format(pickedDate);
                             });
                           }
                         },

@@ -22,11 +22,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        //theme: ThemeData(
-        //colorScheme: ColorScheme.fromSeed(
-        //  seedColor: const Color.fromARGB(255, 112, 216, 64)),
-        //useMaterial3: true,
-        //),
+       
         home: const MyHomePage(),
       ),
     );
@@ -105,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             HomeScreen(),
             FormScreen(),
-            //Center(child: Text('New Tab')),
+            
           ],
         ),
         bottomNavigationBar: Container(
@@ -131,11 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Color.fromARGB(255, 255, 255, 255),
                   ],
                 ),
-                //icon: Icon(
-                //Icons.local_florist,
-                //size: 50,
-                //color: const Color.fromARGB(255, 247, 159, 188),
-                //),
+               
               ),
               Tab(
                 child: gradientIcon(
@@ -146,11 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Color.fromARGB(255, 255, 255, 255),
                   ],
                 ),
-                //icon: Icon(
-                //Icons.add,
-                //size: 30,
-                //color: const Color.fromARGB(255, 247, 159, 188),
-                //),
+            
               ),
             ],
             labelColor: Colors.pink,
