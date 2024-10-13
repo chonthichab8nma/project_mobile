@@ -70,9 +70,11 @@ class _FormScreenState extends State<FormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-            //title: const Text('บันทึกอารมณ์'),
-            ),
+          backgroundColor: Colors.white,
+          //title: const Text('บันทึกอารมณ์'),
+        ),
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Form(
@@ -154,11 +156,15 @@ class _FormScreenState extends State<FormScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       buildEmotionIcon(
-                          'Red', const Color.fromARGB(255, 241, 100, 251)),
-                      buildEmotionIcon('Blue', Colors.blue),
-                      buildEmotionIcon('Green', Colors.green),
-                      buildEmotionIcon('Yellow', Colors.yellow),
-                      buildEmotionIcon('Pink', Colors.pink),
+                          'Happy', const Color.fromARGB(255, 250, 218, 39)),
+                      buildEmotionIcon(
+                          'Sad', const Color.fromARGB(255, 10, 8, 124)),
+                      buildEmotionIcon(
+                          'Angry', const Color.fromARGB(255, 255, 35, 35)),
+                      buildEmotionIcon(
+                          'Excited', const Color.fromARGB(255, 157, 59, 255)),
+                      buildEmotionIcon(
+                          'Bored', const Color.fromARGB(255, 20, 21, 24)),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -174,91 +180,35 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        var statement = Transactions(
-                          id: idController.text,
-                          note: noteController.text,
-                          emotionColor: selectedEmotionColor ?? 'Unknown',
-                          date: currentDate,
-                        );
-                        var provider = Provider.of<TransactionProvider>(context,
-                            listen: false);
-                        provider.addTransaction(statement);
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          var statement = Transactions(
+                            id: idController.text,
+                            note: noteController.text,
+                            emotionColor: selectedEmotionColor ?? 'Unknown',
+                            date: currentDate,
+                          );
+                          var provider = Provider.of<TransactionProvider>(
+                              context,
+                              listen: false);
+                          provider.addTransaction(statement);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            fullscreenDialog: true,
-                            builder: (context) {
-                              return MyHomePage();
-                            },
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text('บันทึก'),
-                  ),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              fullscreenDialog: true,
+                              builder: (context) {
+                                return MyHomePage();
+                              },
+                            ),
+                          );
+                        }
+                      },
+                      child: Center(
+                        child: const Text('Save'),
+                      )),
                 ],
               ),
-
-              //children: [
-              //TextFormField(
-              //decoration: const InputDecoration(
-              //labelText: 'ID',
-              //),
-              //controller: titleController,
-              //validator: (String? str) {
-              //if (str!.isEmpty) {
-              //return 'กรุณากรอกไอดี';
-              //}
-              //return null;
-              //},
-              //),
-              //TextFormField(
-              //decoration: const InputDecoration(
-              //labelText: 'จำนวนเงิน',
-              //),
-              //keyboardType: TextInputType.number,
-              //controller: amountController,
-              //validator: (String? input) {
-              //try {
-              //double amount = double.parse(input!);
-              //if (amount < 0) {
-              //return 'กรุณากรอกข้อมูลมากกว่า 0';
-              //}
-              //} catch (e) {
-              //return 'กรุณากรอกข้อมูลเป็นตัวเลข';
-              //}
-              //},
-              //),
-              //TextButton(
-              //  child: const Text('บันทึก'),
-              //onPressed: () {
-              //if (formKey.currentState!.validate()) {
-              // create transaction data object
-              //var statement = Transactions(
-              //  keyID: null,
-              //title: titleController.text,
-              //amount: double.parse(amountController.text),
-              //date: DateTime.now());
-
-              // add transaction data object to provider
-//                                     var provider = Provider.of<TransactionProvider>(context,
-              //                                      listen: false);
-//
-              //                                   provider.addTransaction(statement);
-//
-              //                                  Navigator.push(
-              //                                    context,
-              //                                 MaterialPageRoute(
-              //                                  fullscreenDialog: true,
-              //                               builder: (context) {
-              //                              return MyHomePage();
-              //                        }));
-              //           }
-              //      })
-              //    ],
             )));
   }
 }

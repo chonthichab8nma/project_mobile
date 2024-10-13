@@ -71,18 +71,34 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text(
             'MoodLocker',
             style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
           ),
           centerTitle: false,
-          backgroundColor: Color(0xFF759FB1),
+          //backgroundColor: Color(0xFF759FB1),
           elevation: 0,
           leading: IconButton(
             icon: const Icon(
               Icons.account_circle,
-              color: Colors.white,
+              color: Color.fromARGB(255, 0, 0, 0),
               size: 30,
             ),
             onPressed: () {},
+            color: const Color.fromARGB(255, 0, 0, 0),
+          ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(255, 255, 255, 255)
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
           ),
         ),
         body: TabBarView(
@@ -94,17 +110,25 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 0, 0, 0),
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(255, 255, 255, 255)
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
           ),
           child: TabBar(
             tabs: [
               Tab(
                 child: gradientIcon(
-                  Icons.mood_sharp,
+                  Icons.home,
                   40,
                   [
-                    Color.fromARGB(255, 255, 189, 255),
-                    Color.fromARGB(255, 250, 255, 182),
+                    Color.fromARGB(255, 255, 56, 245),
+                    Color.fromARGB(255, 40, 86, 249),
                   ],
                 ),
                 //icon: Icon(
@@ -114,11 +138,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 //),
               ),
               Tab(
-                icon: Icon(
+                child: gradientIcon(
                   Icons.add,
-                  size: 30,
-                  color: const Color.fromARGB(255, 247, 159, 188),
+                  40,
+                  [
+                    Color.fromARGB(255, 255, 56, 245),
+                    Color.fromARGB(255, 40, 86, 249),
+                  ],
                 ),
+                //icon: Icon(
+                //Icons.add,
+                //size: 30,
+                //color: const Color.fromARGB(255, 247, 159, 188),
+                //),
               ),
             ],
             labelColor: Colors.pink,
