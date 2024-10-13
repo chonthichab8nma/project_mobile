@@ -54,8 +54,8 @@ class _FormScreenState extends State<FormScreen> {
             shape: BoxShape.circle,
             border: Border.all(
               color: selectedEmotionColor == color
-                  ? Colors.black
-                  : Colors.transparent,
+                  ? const Color.fromARGB(255, 255, 255, 255)
+                  : const Color.fromARGB(0, 255, 255, 255),
               width: 2,
             ),
           ),
@@ -70,12 +70,15 @@ class _FormScreenState extends State<FormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          //title: const Text('บันทึกอารมณ์'),
-        ),
-        body: SingleChildScrollView(
+        backgroundColor: const Color.fromARGB(255, 203, 32, 32),
+        body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Color.fromARGB(255, 255, 210, 234),
+                Color.fromARGB(255, 215, 240, 250),
+                Color.fromARGB(255, 245, 249, 213)
+              ]),
+            ),
             padding: const EdgeInsets.all(16.0),
             child: Form(
               key: formKey,
@@ -84,8 +87,10 @@ class _FormScreenState extends State<FormScreen> {
                 children: [
                   Card(
                     elevation: 2.0,
+                    color: const Color.fromARGB(255, 255, 255, 255)
+                        .withOpacity(0.5),
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         decoration: const InputDecoration(
                           labelText: 'ID',
@@ -101,16 +106,17 @@ class _FormScreenState extends State<FormScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   Card(
                     elevation: 2.0,
+                    color: const Color.fromARGB(102, 255, 255, 255),
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
                         controller: dateController,
                         decoration: const InputDecoration(
-                          labelText: 'กรอกวันที่ (year-month-day)',
+                          labelText: 'Date',
                           suffixIcon: Icon(Icons.calendar_today),
                         ),
                         readOnly: true,
@@ -148,28 +154,40 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    'เลือกอารมณ์ของคุณ',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    'Your Mood',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Color.fromRGBO(0, 0, 0, 1),
+                        fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            color: Color.fromARGB(255, 233, 210, 171),
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 3.0,
+                          )
+                        ]),
                   ),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       buildEmotionIcon(
-                          'Happy', const Color.fromARGB(255, 250, 218, 39)),
+                          'Happy', const Color.fromARGB(255, 236, 206, 69)),
                       buildEmotionIcon(
-                          'Sad', const Color.fromARGB(255, 10, 8, 124)),
+                          'Sad', const Color.fromARGB(255, 0, 191, 255)),
                       buildEmotionIcon(
-                          'Angry', const Color.fromARGB(255, 255, 35, 35)),
+                          'Angry', const Color.fromARGB(255, 216, 79, 79)),
                       buildEmotionIcon(
-                          'Excited', const Color.fromARGB(255, 157, 59, 255)),
+                          'Excited', const Color.fromARGB(255, 187, 67, 187)),
                       buildEmotionIcon(
-                          'Bored', const Color.fromARGB(255, 20, 21, 24)),
+                          'Bored', const Color.fromARGB(255, 104, 104, 98)),
                     ],
                   ),
                   const SizedBox(height: 10),
                   Card(
                     elevation: 2.0,
+                    color: const Color.fromARGB(255, 255, 255, 255)
+                        .withOpacity(0.5),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
@@ -182,6 +200,12 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
+                          if (selectedEmotionColor == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('กรุณาเลือกอารมณ์')),
+                            );
+                            return;
+                          }
                           var statement = Transactions(
                             id: idController.text,
                             note: noteController.text,

@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Icon(
         icon,
         size: size,
-        color: Colors.white,
+        color: const Color.fromARGB(255, 255, 255, 255),
       ),
     );
   }
@@ -71,17 +71,17 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text(
             'MoodLocker',
             style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 20,
                 fontWeight: FontWeight.bold),
           ),
           centerTitle: false,
-          //backgroundColor: Color(0xFF759FB1),
+          backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
             icon: const Icon(
               Icons.account_circle,
-              color: Color.fromARGB(255, 0, 0, 0),
+              color: Color.fromARGB(255, 255, 255, 255),
               size: 30,
             ),
             onPressed: () {},
@@ -91,9 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 255, 255, 255),
-                  Color.fromARGB(255, 255, 255, 255),
-                  Color.fromARGB(255, 255, 255, 255)
+                  Color.fromARGB(255, 255, 179, 221),
+                  Color.fromARGB(255, 146, 224, 255),
+                  Color.fromARGB(255, 27, 142, 168),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -112,9 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 255, 255, 255),
-                Color.fromARGB(255, 255, 255, 255)
+                Color.fromARGB(255, 255, 179, 221),
+                Color.fromARGB(255, 146, 224, 255),
+                Color.fromARGB(255, 27, 142, 168)
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -127,8 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Icons.home,
                   40,
                   [
-                    Color.fromARGB(255, 255, 56, 245),
-                    Color.fromARGB(255, 40, 86, 249),
+                    Color.fromARGB(255, 255, 255, 255),
+                    Color.fromARGB(255, 255, 255, 255),
                   ],
                 ),
                 //icon: Icon(
@@ -142,8 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Icons.add,
                   40,
                   [
-                    Color.fromARGB(255, 255, 56, 245),
-                    Color.fromARGB(255, 40, 86, 249),
+                    Color.fromARGB(255, 255, 255, 255),
+                    Color.fromARGB(255, 255, 255, 255),
                   ],
                 ),
                 //icon: Icon(
